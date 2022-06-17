@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> REGISTRASI </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <img src ="logo.png" width="50%">;
+  <div class="container">
+    <div class="title"style="text-align: center;">FORM REGISTRASI</div>
+    <div class="content">
+      <div class="alert alert-primary alert-dismissible fade show d-none my-alert" role="alert">
+  <strong>Terimakasih</strong> Anda telah mendaftar.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+     <form name="form-html">
+        <div id="form_alerts"></div>
+        <div class="user-details">
+          <div class="input-box">
+             <label for="NAMA_LENGKAP" class="form-label">Nama Lengkap</label>
+              <input type="text" id="NAMA_LENGKAP" name="NAMA_LENGKAP" class="form-control" placeholder="Masukan nama lengkap" required>
+          </div>
+          <div class="input-box">
+            <label for="JENIS_KELAMIN" class="form-label">Jenis Kelamin</label>
+              <select type="text" id="JENIS_KELAMIN" name="JENIS_KELAMIN" class="form-control" placeholder="Pilih jenis kelamin " required>
+                <option>--Pilih jenis kelamin--</option>
+                <option>Laki-laki</option>
+                <option>Perempuan</option>
+              </select>
+          </div>
+           <div class="input-box">
+           <label for="TEMPAT_LAHIR" class="form-label">Tempat Lahir</label>
+              <input type="text" id="TEMPAT_LAHIR" name="TEMPAT_LAHIR" class="form-control" placeholder="Masukan tempat lahir " required>
+          </div>
+           <div class="input-box">
+           <label for="TANGGAL_LAHIR" class="form-label">Tanggal Lahir</label>
+              <input type="date" id="TANGGAL_LAHIR" name="TANGGAL_LAHIR" class="form-control" placeholder="Masukan tanggal lahir " required>
+          </div>
+          <div class="input-box">
+           <label for="ALAMAT" class="form-label">Alamat</label>
+              <input type="text" id="ALAMAT" name="ALAMAT" class="form-control" placeholder="Masukan alamat " required>
+          </div>
+          <div class="input-box">
+            <label for="EMAIL" class="form-label">Email</label>
+              <input type="email" id="EMAIL" name="EMAIL" class="form-control" placeholder="Masukan email " required>
+          </div>
+          <div class="input-box">
+            <label for="KONTAK" class="form-label">Nomor Kontak</label>
+              <input type="number" id="KONTAK" name="KONTAK" class="form-control" placeholder="Masukan nomor telepon" required>
+          </div>
+          <div class="input-box">
+          <label for="KETERANGAN" class="form-label">KETERANGAN</label>
+              <input type="text" id="KETERANGAN" name="KETERANGAN" class="form-control" placeholder="Masukan keterangan" required>
+          </div>
+        </div>
+        
+          <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+
+          <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Loading...
+</button>
+        
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyF6L8T1mEsBDS9YqL7K0gXh2-U56bX8DswfpY02IFos_lDdi-tN4o5pStSQw0VQljT2w/exec'
+  const form = document.forms['form-html']
+  const btnKirim = document.querySelector('.btn-kirim');
+  const btnLoading = document.querySelector('.btn-loading');
+  const myAlert = document.querySelector('.my-alert');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    //ketika tombol submit diklik
+    //tampilkan tombol loading, hilangkan tombol kirim
+    btnLoading.classList.toggle('d-none');
+    btnKirim.classList.toggle('d-none');
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        //tampilkan tombol kirim, hilangkan tombol loading
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
+        //tampilkan alert
+        myAlert.classList.toggle('d-none');
+        form.reset();
+        console.log('Success!', response)
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+</body>
+</html>
