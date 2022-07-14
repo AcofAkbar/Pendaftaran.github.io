@@ -24,20 +24,19 @@
 
    
 <nav class="navbar navbar-dark bg-info">
-<span class="navbar-brand mb-0 h1">STUDENT DATA</span>
-<img src="https://drive.google.com/uc?export=view&id=1dYJhfa96JlWrp-zwd3_To9cW89gPCMbw" width="60" height="60" alt="" loading="loading">
+<span class="navbar-brand mb-0 h1">DATA PENDAFTAR</span>
 </nav>
  <div class="container-fluid" align="center">
         <?var url = getUrl();?>
         <div>
-            <label>Type Your SRN</label><br>
+            <label>Type Your NAMA_LENGKAP</label><br>
             <input type="text" name="search" id="search" value="" />
             <button id="searchButton">Search</button>
         </div><br>
 
         <table class = "table table-hover" id="tableId" border="1" cellpadding="5px">
         </table>
-    Developed by <a href="https://www.youtube.com/watch?v=yVzOuwFEKAk&t=0s" target="_blank">Mr.Apiwat Wongkanha</a>
+   
 
     </div>
 
@@ -47,7 +46,14 @@
             $('#tableId').hide()
             google.script.run.withSuccessHandler(createTable).getSheetData()
         }
-     
+        $('#searchButton').click(()=>{
+       $('#tableId').show()
+       $('#tableId tr').remove()
+       let table = document.getElementById("tableId")
+       let search = $("#search").val()
+       if(search == ""){
+         $('#tableId').hide()
+     }})
             tableData.forEach((rowArray, i) => {
                 if (i == 0) {
                     $('table').append(`<tr  class="table-info" ></tr>`)
